@@ -1,0 +1,32 @@
+{
+  "name": "lintush",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "bin": {
+    "lintush": "./bin/index.js"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/format": "^8.0.0",
+    "@commitlint/lint": "^8.1.0",
+    "@commitlint/load": "^8.1.0",
+    "chalk": "^2.4.2",
+    "find-up": "^4.1.0",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.0",
+    "prompts": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0"
+  }
+}
