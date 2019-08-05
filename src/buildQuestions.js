@@ -86,8 +86,8 @@ const buildTextQuestion = (name, {question, mandatory}, initialValue) => ({
 function buildQuestions(config, prevValues = {}) {
   return [
     buildAutoCompleteQuestion('type', config.type, prevValues.type),
-    buildTextQuestion('subject', config.subject, prevValues.subject),
     buildAutoCompleteQuestion('scope', config.scope, prevValues.scope),
+    buildTextQuestion('subject', config.subject, prevValues.subject),
     buildTextQuestion('body', config.body, prevValues.body),
     buildTextQuestion('bugNumber', config.bugNumber, prevValues.bugNumber),
     buildTextQuestion('screenshot', config.screenshot, prevValues.screenshot),
