@@ -12,7 +12,7 @@
   "engines": {
     "node": ">=7.6.0"
   },
-  "author": "",
+  "author": "segevofer@gmail.com",
   "license": "MIT",
   "homepage": "https://github.com/google/lintush",
   "repository": {

@@ -16,15 +16,15 @@
 const fs = require('fs');
 const logger = require('./logger');
 
-const createConfigFile = (configPath) => {
+const createConfigFileIfNeeded = (configPath, fileContent) => {
   if (fs.existsSync(configPath)) {
     logger.error(`File already exist ${configPath}`);
   } else {
-    fs.writeFileSync(configPath, require('./lintush-config-example'));
+    fs.writeFileSync(configPath, fileContent);
     logger.configFileWritten(configPath);
   }
 };
 
 module.exports = {
-  createConfigFile,
+  createConfigFileIfNeeded,
 };

@@ -20,11 +20,12 @@ const minimist = require('minimist');
 const askQuestionsAndValidate = require('./askQuestionsAndValidate');
 const handleCommitMessage = require('./handleCommitMessage');
 const logger = require('./logger');
-const {createConfigFile} = require('./utils');
+const {createConfigFileIfNeeded} = require('./utils');
 
 const CWD = process.cwd();
 const argv = minimist(process.argv.slice(2));
-const defaultConfigPath = path.join(CWD, 'lintush-config.js');
+const defaultLintushConfigPath = path.join(CWD, 'lintush-config.js');
+const defaultCommitLintConfigPath = path.join(CWD, 'commitlint.config.js');
 
 function getLintConfigValue(commitLintConfig, ruleName, defaultValue) {
   return _.get(commitLintConfig, ['rules', ruleName, '2'], defaultValue);
@@ -38,7 +39,14 @@ function getLintConfigValue(commitLintConfig, ruleName, defaultValue) {
   }
 
   if (argv.init) {
-    createConfigFile(defaultConfigPath);
+    createConfigFileIfNeeded(
+        defaultLintushConfigPath,
+        require('./lintush-config-example')
+    );
+    createConfigFileIfNeeded(
+        defaultCommitLintConfigPath,
+        require('./commitlint-config-example')
+    );
     return;
   }
 
@@ -49,10 +57,12 @@ function getLintConfigValue(commitLintConfig, ruleName, defaultValue) {
 
   if (!commitLintConfigPath) {
     logger.error(`Could not find config file ${CWD}/commitlint.config.js`);
+    logger.success(`Type "lintush --init" to create it`);
     process.exit(1);
   }
   if (!lintushConfigPath) {
     logger.error(`Could not find config file ${CWD}/lintush-config.js|json`);
+    logger.success(`Type "lintush --init" to create it`);
     process.exit(1);
   }
   const commitLintConfig = require(commitLintConfigPath);
@@ -61,13 +71,13 @@ function getLintConfigValue(commitLintConfig, ruleName, defaultValue) {
   const bodyMaxLineLength = getLintConfigValue(
       commitLintConfig,
       'body-max-line-length',
-      72
+      72,
   );
 
   const commitMessage = await askQuestionsAndValidate(
       lintushConfig,
       commitLintConfig,
-      bodyMaxLineLength
+      bodyMaxLineLength,
   );
 
   handleCommitMessage(commitMessage);

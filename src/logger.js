@@ -26,7 +26,7 @@ logger.logIndent = (msg) => console.log(`    ${msg}`);
 
 logger.configFileWritten = (configPath) => {
   logger();
-  logger.logIndent('Successfully written lintush-config file.');
+  logger.logIndent('Successfully written config file.');
   logger.logIndent(`Edit file ${green(configPath)} with your configuration`);
 };
 
