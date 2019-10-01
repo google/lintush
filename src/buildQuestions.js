@@ -51,12 +51,22 @@ const buildAutoCompleteChoices = (name, choices, mandatory) => {
     );
   }
   let minValueLength = 1;
+  let extensionFlg = false;
   _.forEach(choices, (value, title) => {
+    extensionFlg = _.isArray(value);
     minValueLength = Math.max(
         minValueLength,
         title.length + AUTO_COMPLETE_CHIOCES_TITLE_PADDING
     );
   });
+
+  if (extensionFlg) {
+    return _.map(choices, (title, value) => ({
+      // eslint-disable-next-line max-len
+      title: `${value}${getSpaces(minValueLength - value.length)} ${title[1].titlePrefix}  ${gray(title[0])}`,
+      value: title[1].value,
+    }));
+  }
 
   return _.map(choices, (title, value) => ({
     title: `${value}${getSpaces(minValueLength - value.length)}${gray(title)}`,

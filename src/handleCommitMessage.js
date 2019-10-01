@@ -17,9 +17,14 @@
 const {green} = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const minimist = require('minimist');
+const argv = minimist(process.argv.slice(2));
 
 module.exports = function handleCommitMessage(commitMessage) {
   const CWD = process.cwd();
   fs.writeFileSync(path.join(CWD, '.git', 'COMMIT_EDITMSG'), commitMessage);
-  console.log(green(`Run "git commit -F .git/COMMIT_EDITMSG -e"`));
+  if (!argv.silent) {
+    console.log(green(`Run "git commit -F .git/COMMIT_EDITMSG -e"`));
+  }
 };
+
