@@ -36,8 +36,8 @@ const parseBody = (body, bodyMaxLineLength) => {
       lineCharCount += word.length + 1;
       result += ` ${word}`;
     } else {
-      result += `\n${word} `;
-      lineCharCount = 0;
+      result += `\n${word}`;
+      lineCharCount = word.length;
     }
   });
   return result.trim();
