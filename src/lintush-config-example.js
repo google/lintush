@@ -15,9 +15,22 @@
  **/
 /* eslint-disable max-len */
 module.exports = `/**
- *  Edit this code to fit your lint demands:
+ *  TODO: Edit this code to fit your lint demands:
+ *  For example:
+ * 
+ *  const commitScopes = require("./commitlint.config").rules["scope-enum"][2];
  */
-const commitScopes = require("./commitlint.config").rules["scope-enum"][2];
+ 
+const commitScopes = [
+  "button",
+  "checkbox",
+  "config",
+  "fonts",
+  "grid",
+  "palette",
+  "web-icons",
+  "webpack"
+];
 
 module.exports = {
   body: {
