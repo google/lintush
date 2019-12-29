@@ -11,7 +11,7 @@ npm i -g lintush
 npm i -D lintush
 ```
 
-<p align="center"><img src="/img/demo.gif?raw=true"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/4939021/71554157-4ef3a100-2a24-11ea-97a5-bdc2a15292ea.gif?raw=true"/></p>
 
 1. Run ```lintush --init``` in your project root to create a ```lintush-config.js``` file.
 1. Edit ```lintush-config.js``` to fit your lint demands.
