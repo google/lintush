@@ -90,6 +90,7 @@ function buildQuestions(config, prevValues = {}) {
     buildTextQuestion('subject', config.subject, prevValues.subject),
     buildTextQuestion('body', config.body, prevValues.body),
     buildTextQuestion('bugNumber', config.bugNumber, prevValues.bugNumber),
+    buildAutoCompleteQuestion('isFix', config.isFix, prevValues.isFix),
     buildTextQuestion('screenshot', config.screenshot, prevValues.screenshot),
   ];
 }

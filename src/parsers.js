@@ -43,14 +43,14 @@ const parseBody = (body, bodyMaxLineLength) => {
   return result.trim();
 };
 
-const parseSingleBugNumber = (bugNumber) => {
+const parseSingleBugNumber = (bugNumber, isFix) => {
   if (bugNumber.indexOf('b/') !== -1) {
-    return `Fixes: ${bugNumber}`;
+    return eval(isFix) ? `Fixes: ${bugNumber}` : `Updates: ${bugNumber}`;
   }
-  return `Fixes: b/${bugNumber}`;
+  return eval(isFix) ? `Fixes: b/${bugNumber}` : `Updates: b/${bugNumber}`;
 };
 
-const parseBugNumber = (bugNumberString) => {
+const parseBugNumber = (bugNumberString, isFix) => {
   if (!bugNumberString) {
     return '';
   }
@@ -58,7 +58,7 @@ const parseBugNumber = (bugNumberString) => {
   return `\n${bugNumberString
       .split(ANY_SEPARATOR)
       .filter((bug) => !!bug) // ignore spaces
-      .map((bug) => parseSingleBugNumber(bug))
+      .map((bug) => parseSingleBugNumber(bug, isFix))
       .join('\n')}`;
 };
 
