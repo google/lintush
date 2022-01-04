@@ -45,9 +45,9 @@ const parseBody = (body, bodyMaxLineLength) => {
 
 const parseSingleBugNumber = (bugNumber, isFix) => {
   if (bugNumber.indexOf('b/') !== -1) {
-    return `Fixes: ${bugNumber}`;
+    return eval(isFix) ? `Fixes: ${bugNumber}` : `Bug: ${bugNumber}`;
   }
-  return `Fixes: b/${bugNumber}`;
+  return eval(isFix) ? `Fixes: b/${bugNumber}` : `Bug: b/${bugNumber}`;
 };
 
 const parseBugNumber = (bugNumberString, isFix) => {
