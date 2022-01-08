@@ -14,16 +14,21 @@
  limitations under the License.
  **/
 const { cyan, yellow, green, gray } = require("chalk");
-const _ = require("lodash");
 
 const OPTIONAL = yellow("[OPTIONAL] ");
 const AUTO_COMPLETE_CHIOCES_TITLE_PADDING = 5;
 
-const getSpaces = (spacing) => _.times(spacing, _.constant(" ")).join("");
+const getSpaces = (spacing = 0) => {
+  let result = "";
+  for (let i = 0; i < spacing; i++) {
+    result += " ";
+  }
+  return result;
+};
 
 const buildQuestionMessage = (question, mandatory, optionsToPrint) => {
   let suffix = "\n";
-  if (_.isArray(optionsToPrint)) {
+  if (Array.isArray(optionsToPrint)) {
     suffix += gray(optionsToPrint.join(" | "));
     suffix += `\n`;
   }
@@ -34,7 +39,7 @@ const buildQuestionMessage = (question, mandatory, optionsToPrint) => {
 };
 
 const buildAutoCompleteChoices = (name, choices, mandatory) => {
-  if (_.isArray(choices)) {
+  if (Array.isArray(choices)) {
     const result = [];
 
     if (!mandatory) {
@@ -51,17 +56,25 @@ const buildAutoCompleteChoices = (name, choices, mandatory) => {
     );
   }
   let minValueLength = 1;
-  _.forEach(choices, (value, title) => {
+
+  const values = Object.keys(choices);
+
+  values.forEach((title) => {
     minValueLength = Math.max(
       minValueLength,
       title.length + AUTO_COMPLETE_CHIOCES_TITLE_PADDING
     );
   });
 
-  return _.map(choices, (title, value) => ({
-    title: `${value}${getSpaces(minValueLength - value.length)}${gray(title)}`,
-    value,
-  }));
+  return values.map((value) => {
+    const spaces = getSpaces(minValueLength - value.length);
+    const title = `${value}${spaces}${gray(choices[value])}`;
+
+    return {
+      title,
+      value,
+    };
+  });
 };
 
 const buildAutoCompleteQuestion = (

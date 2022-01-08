@@ -13,7 +13,6 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  **/
-const _ = require("lodash");
 const ANY_SEPARATOR = new RegExp(/\;|\,|\ /);
 
 const parseScope = (scope) => {
@@ -28,7 +27,7 @@ const parseBody = (body, bodyMaxLineLength) => {
   const words = body.trim().split(" ");
   let result = "";
   let lineCharCount = 0;
-  _.forEach(words, (word) => {
+  words.forEach((word) => {
     if (lineCharCount === 0) {
       lineCharCount += word.length;
       result += word;

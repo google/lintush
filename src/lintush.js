@@ -14,7 +14,6 @@
     limitations under the License.
 **/
 const findUp = require("find-up");
-const _ = require("lodash");
 const path = require("path");
 const minimist = require("minimist");
 const askQuestionsAndValidate = require("./askQuestionsAndValidate");
@@ -27,9 +26,17 @@ const argv = minimist(process.argv.slice(2));
 const defaultLintushConfigPath = path.join(CWD, "lintush-config.js");
 const defaultCommitLintConfigPath = path.join(CWD, "commitlint.config.js");
 
-function getLintConfigValue(commitLintConfig, ruleName, defaultValue) {
-  return _.get(commitLintConfig, ["rules", ruleName, "2"], defaultValue);
-}
+const getLintConfigValue = (commitLintConfig, ruleName, defaultValue) => {
+  if (
+    commitLintConfig.rules &&
+    commitLintConfig.rules[ruleName] &&
+    commitLintConfig.rules[ruleName]["2"] !== undefined
+  ) {
+    return commitLintConfig.rules[ruleName]["2"];
+  } else {
+    return defaultValue;
+  }
+};
 
 (async () => {
   if (argv.version) {
