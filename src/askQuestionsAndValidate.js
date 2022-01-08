@@ -38,6 +38,7 @@ module.exports = async function askQuestionsAndValidate(
   let subject = '';
   let body = '';
   let bugNumber = '';
+  let isFix = '';
   let screenshot = '';
   let commitMessage = '';
 
@@ -48,6 +49,7 @@ module.exports = async function askQuestionsAndValidate(
       subject,
       body,
       bugNumber,
+      isFix,
       screenshot,
     };
     const results = await prompts(
@@ -55,12 +57,12 @@ module.exports = async function askQuestionsAndValidate(
     );
 
     // apply current values to previous values:
-    ({type, scope, subject, body, bugNumber, screenshot} = results);
+    ({type, scope, subject, body, bugNumber, isFix, screenshot} = results);
 
     const commitParts = [
       `${type}${parseScope(scope)}: ${subject}\n`,
       parseBody(body, bodyMaxLineLength),
-      parseBugNumber(bugNumber),
+      parseBugNumber(bugNumber, isFix),
       parseScreenshot(screenshot),
     ];
 

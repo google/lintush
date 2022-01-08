@@ -42,6 +42,14 @@ module.exports = {
     mandatory: false,
     question: "Enter the bug id or click enter"
   },
+  isFix: {
+    choices: {
+      true: "the commit intended to fix the bug",
+      false: "the commit does not intended to fix the bug"
+      },
+    mandatory: false,
+    question: "Is the commit intend to fix the bug?"
+  },
   scope: {
     choices: commitScopes,
     mandatory: false,
