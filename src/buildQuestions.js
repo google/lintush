@@ -84,15 +84,19 @@ const buildTextQuestion = (name, { question, mandatory }, initialValue) => ({
 });
 
 function buildQuestions(config, prevValues = {}) {
+  const optionalIsFixQuestion = config.isFix
+    ? buildAutoCompleteQuestion("isFix", config.isFix, prevValues.isFix)
+    : undefined;
+
   return [
     buildAutoCompleteQuestion("type", config.type, prevValues.type),
     buildAutoCompleteQuestion("scope", config.scope, prevValues.scope),
     buildTextQuestion("subject", config.subject, prevValues.subject),
     buildTextQuestion("body", config.body, prevValues.body),
     buildTextQuestion("bugNumber", config.bugNumber, prevValues.bugNumber),
-    buildAutoCompleteQuestion("isFix", config.isFix, prevValues.isFix),
+    optionalIsFixQuestion,
     buildTextQuestion("screenshot", config.screenshot, prevValues.screenshot),
-  ];
+  ].filter((question) => !!question);
 }
 
 module.exports = buildQuestions;
