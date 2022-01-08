@@ -4,16 +4,20 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "google"],
+  "extends": ["google", "plugin:prettier/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": 2018
   },
   "rules": {
     "require-jsdoc": 0,
-    "no-useless-escape": 0
+    "no-useless-escape": 0,
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off"
   }
 }

@@ -13,18 +13,18 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  **/
-const {cyan, yellow, green, gray} = require('chalk');
-const _ = require('lodash');
+const { cyan, yellow, green, gray } = require("chalk");
+const _ = require("lodash");
 
-const OPTIONAL = yellow('[OPTIONAL] ');
+const OPTIONAL = yellow("[OPTIONAL] ");
 const AUTO_COMPLETE_CHIOCES_TITLE_PADDING = 5;
 
-const getSpaces = (spacing) => _.times(spacing, _.constant(' ')).join('');
+const getSpaces = (spacing) => _.times(spacing, _.constant(" ")).join("");
 
 const buildQuestionMessage = (question, mandatory, optionsToPrint) => {
-  let suffix = '\n';
+  let suffix = "\n";
   if (_.isArray(optionsToPrint)) {
-    suffix += gray(optionsToPrint.join(' | '));
+    suffix += gray(optionsToPrint.join(" | "));
     suffix += `\n`;
   }
   if (!mandatory) {
@@ -40,21 +40,21 @@ const buildAutoCompleteChoices = (name, choices, mandatory) => {
     if (!mandatory) {
       result.push({
         title: `None ${gray(
-            `if you choose this, the ${name} will be omitted`
+          `if you choose this, the ${name} will be omitted`
         )}`,
-        value: 'NONE',
+        value: "NONE",
       });
     }
 
     return result.concat(
-        choices.map((choice) => ({title: choice, value: choice}))
+      choices.map((choice) => ({ title: choice, value: choice }))
     );
   }
   let minValueLength = 1;
   _.forEach(choices, (value, title) => {
     minValueLength = Math.max(
-        minValueLength,
-        title.length + AUTO_COMPLETE_CHIOCES_TITLE_PADDING
+      minValueLength,
+      title.length + AUTO_COMPLETE_CHIOCES_TITLE_PADDING
     );
   });
 
@@ -65,19 +65,19 @@ const buildAutoCompleteChoices = (name, choices, mandatory) => {
 };
 
 const buildAutoCompleteQuestion = (
-    name,
-    {question, choices, mandatory},
-    initialValue
+  name,
+  { question, choices, mandatory },
+  initialValue
 ) => ({
-  type: 'autocomplete',
+  type: "autocomplete",
   initial: initialValue,
   name,
   message: buildQuestionMessage(question, mandatory, choices),
   choices: buildAutoCompleteChoices(name, choices, mandatory),
 });
 
-const buildTextQuestion = (name, {question, mandatory}, initialValue) => ({
-  type: 'text',
+const buildTextQuestion = (name, { question, mandatory }, initialValue) => ({
+  type: "text",
   initial: initialValue,
   name,
   message: buildQuestionMessage(question, mandatory),
@@ -85,13 +85,13 @@ const buildTextQuestion = (name, {question, mandatory}, initialValue) => ({
 
 function buildQuestions(config, prevValues = {}) {
   return [
-    buildAutoCompleteQuestion('type', config.type, prevValues.type),
-    buildAutoCompleteQuestion('scope', config.scope, prevValues.scope),
-    buildTextQuestion('subject', config.subject, prevValues.subject),
-    buildTextQuestion('body', config.body, prevValues.body),
-    buildTextQuestion('bugNumber', config.bugNumber, prevValues.bugNumber),
-    buildAutoCompleteQuestion('isFix', config.isFix, prevValues.isFix),
-    buildTextQuestion('screenshot', config.screenshot, prevValues.screenshot),
+    buildAutoCompleteQuestion("type", config.type, prevValues.type),
+    buildAutoCompleteQuestion("scope", config.scope, prevValues.scope),
+    buildTextQuestion("subject", config.subject, prevValues.subject),
+    buildTextQuestion("body", config.body, prevValues.body),
+    buildTextQuestion("bugNumber", config.bugNumber, prevValues.bugNumber),
+    buildAutoCompleteQuestion("isFix", config.isFix, prevValues.isFix),
+    buildTextQuestion("screenshot", config.screenshot, prevValues.screenshot),
   ];
 }
 

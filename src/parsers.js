@@ -13,20 +13,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  **/
-const _ = require('lodash');
+const _ = require("lodash");
 const ANY_SEPARATOR = new RegExp(/\;|\,|\ /);
 
 const parseScope = (scope) => {
-  const isScopeEmpty = !scope || scope === 'NONE';
-  return isScopeEmpty ? '' : `(${scope})`;
+  const isScopeEmpty = !scope || scope === "NONE";
+  return isScopeEmpty ? "" : `(${scope})`;
 };
 
 const parseBody = (body, bodyMaxLineLength) => {
   if (!body) {
-    return '';
+    return "";
   }
-  const words = body.trim().split(' ');
-  let result = '';
+  const words = body.trim().split(" ");
+  let result = "";
   let lineCharCount = 0;
   _.forEach(words, (word) => {
     if (lineCharCount === 0) {
@@ -44,7 +44,7 @@ const parseBody = (body, bodyMaxLineLength) => {
 };
 
 const parseSingleBugNumber = (bugNumber, isFix) => {
-  if (bugNumber.indexOf('b/') !== -1) {
+  if (bugNumber.indexOf("b/") !== -1) {
     return eval(isFix) ? `Fixes: ${bugNumber}` : `Bug: ${bugNumber}`;
   }
   return eval(isFix) ? `Fixes: b/${bugNumber}` : `Bug: b/${bugNumber}`;
@@ -52,21 +52,21 @@ const parseSingleBugNumber = (bugNumber, isFix) => {
 
 const parseBugNumber = (bugNumberString, isFix) => {
   if (!bugNumberString) {
-    return '';
+    return "";
   }
 
   return `\n${bugNumberString
-      .split(ANY_SEPARATOR)
-      .filter((bug) => !!bug) // ignore spaces
-      .map((bug) => parseSingleBugNumber(bug, isFix))
-      .join('\n')}`;
+    .split(ANY_SEPARATOR)
+    .filter((bug) => !!bug) // ignore spaces
+    .map((bug) => parseSingleBugNumber(bug, isFix))
+    .join("\n")}`;
 };
 
 const parseScreenshot = (screenshot) => {
   if (screenshot) {
     return `Screenshot: ${screenshot}`;
   }
-  return '';
+  return "";
 };
 
 module.exports = {
