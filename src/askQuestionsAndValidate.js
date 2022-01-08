@@ -19,7 +19,7 @@
 const prompts = require("prompts");
 const lint = require("@commitlint/lint").default;
 const { format } = require("@commitlint/format");
-const load = require("@commitlint/load");
+const load = require("@commitlint/load").default;
 
 const buildQuestions = require("./buildQuestions");
 const parsers = require("./parsers");
