@@ -44,11 +44,11 @@ module.exports = {
   },
   isFix: {
     choices: {
-      true: "the commit intended to fix the bug",
-      false: "the commit does not intended to fix the bug"
-      },
+      true: "The commit fixes the bug",
+      false: "The commit is related to the bug"
+    },
     mandatory: false,
-    question: "Is the commit intend to fix the bug?"
+    question: "Does this commit fix the bug?"
   },
   scope: {
     choices: commitScopes,
