@@ -18,7 +18,7 @@ const { green } = require("chalk");
 const fs = require("fs");
 const path = require("path");
 
-module.exports = function handleCommitMessage(commitMessage) {
+const handleCommitMessage = (commitMessage) => {
   const CWD = process.cwd();
   try {
     fs.writeFileSync(path.join(CWD, ".git", "COMMIT_EDITMSG"), commitMessage);
@@ -28,3 +28,5 @@ module.exports = function handleCommitMessage(commitMessage) {
     console.log(commitMessage);
   }
 };
+
+module.exports = handleCommitMessage;

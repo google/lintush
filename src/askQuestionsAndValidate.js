@@ -27,11 +27,11 @@ const logger = require("./logger");
 
 const { parseScope, parseBody, parseBugNumber, parseScreenshot } = parsers;
 
-module.exports = async function askQuestionsAndValidate(
+const askQuestionsAndValidate = async (
   lintushConfig,
   commitLintConfig,
   bodyMaxLineLength
-) {
+) => {
   let valid = false;
   let type = "";
   let scope = "";
@@ -89,3 +89,5 @@ module.exports = async function askQuestionsAndValidate(
   }
   return commitMessage;
 };
+
+module.exports = askQuestionsAndValidate;

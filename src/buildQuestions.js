@@ -96,7 +96,7 @@ const buildTextQuestion = (name, { question, mandatory }, initialValue) => ({
   message: buildQuestionMessage(question, mandatory),
 });
 
-function buildQuestions(config, prevValues = {}) {
+const buildQuestions = (config, prevValues = {}) => {
   const optionalIsFixQuestion = config.isFix
     ? buildAutoCompleteQuestion("isFix", config.isFix, prevValues.isFix)
     : undefined;
@@ -110,6 +110,6 @@ function buildQuestions(config, prevValues = {}) {
     optionalIsFixQuestion,
     buildTextQuestion("screenshot", config.screenshot, prevValues.screenshot),
   ].filter((question) => !!question);
-}
+};
 
 module.exports = buildQuestions;
