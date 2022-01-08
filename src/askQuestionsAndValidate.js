@@ -17,7 +17,7 @@
 /* eslint-disable no-loop-func */
 
 const prompts = require("prompts");
-const lint = require("@commitlint/lint");
+const lint = require("@commitlint/lint").default;
 const { format } = require("@commitlint/format");
 const load = require("@commitlint/load");
 
