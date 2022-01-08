@@ -58,11 +58,12 @@ module.exports = async function askQuestionsAndValidate(
 
     // apply current values to previous values:
     ({ type, scope, subject, body, bugNumber, isFix, screenshot } = results);
+    const optionalIsFix = isFix === undefined || isFix === "true";
 
     const commitParts = [
       `${type}${parseScope(scope)}: ${subject}\n`,
       parseBody(body, bodyMaxLineLength),
-      parseBugNumber(bugNumber, isFix),
+      parseBugNumber(bugNumber, optionalIsFix),
       parseScreenshot(screenshot),
     ];
 
