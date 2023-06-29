@@ -23,9 +23,9 @@
     "url": "https://github.com/google/lintush/issues"
   },
   "dependencies": {
-    "@commitlint/cli": "^16.0.1",
+    "@commitlint/cli": "^17.6.6",
     "@commitlint/format": "^16.0.0",
-    "@commitlint/lint": "^16.0.0",
+    "@commitlint/lint": "^17.6.6",
     "@commitlint/load": "^16.0.0",
     "chalk": "^2.4.2",
     "find-up": "^4.1.0",
